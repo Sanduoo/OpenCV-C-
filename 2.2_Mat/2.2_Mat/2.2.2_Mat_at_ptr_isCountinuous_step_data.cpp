@@ -52,7 +52,11 @@ class Mat2 {
 			//利用成员变量step和data
 			cout << m.step[0]<< endl;//8
 			cout << m.step[1]<< endl;//4
-			//cout << *((int*)(m.data + m.step[0] * 0 + 0 * m.step[1])) << endl;
+
+			cout << *((int*)(m.data + m.step[0] * 1 + 1 * m.step[1])) << endl;
+
+			//*(int*)  是强制转换后去指针指向变量的值
+
 			/*
 			二维矩阵
 				step[0]——行的大小
