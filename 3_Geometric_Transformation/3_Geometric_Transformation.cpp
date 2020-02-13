@@ -54,6 +54,27 @@ int main(int argc, char* argv[])
 	imshow("warpAffine", dst1);
 	imshow("resize", dst2);
 
+	//旋转变换-二维
+	Mat rI;
+	/*rotaoe(src,dst,rotateCode-ROTATE_90_CLOCKWISE/ROTATE_180/ROTATE_90_COUNTERCLOCKWISE)*/
+	rotate(I, rI, ROTATE_90_COUNTERCLOCKWISE);
+	imshow("旋转", rI);
+
+	//投影变换-三维
+	//方法一将坐标存于数组中
+	cout << "投影变换矩阵1数组" << endl;
+	Point2f srcP[] = { Point2f(0,0),Point2f(200.0,0),Point2f(0,200.0),Point2f(200,200) };
+	Point2f dstP[] = { Point2f(0,0),Point2f(200.0,0),Point2f(0,200.0),Point2f(200,200) };
+	Mat P= getPerspectiveTransform(srcP, dstP);		//计算投影变换矩阵，返回类型为CV_64F
+	for_out(P);
+	//方法二将坐标存于Mat中
+	cout << "投影变换矩阵2Mat" << endl;
+	Mat srcc = (Mat_<float>(4, 2) << 1, 1, 1, 1, 1, 1, 1, 1);
+	Mat dstt = (Mat_<float>(4, 2) << 1, 1, 1, 1, 1, 1, 1, 1);
+	Mat P1= getPerspectiveTransform(srcc, dstt);
+	for_out(P1);
+
+
 	waitKey(0);
 	return 0;
 }
